@@ -1,42 +1,61 @@
 package domain;
 
-
-import java.util.List;
-
+import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
-
-
 @Entity
-public class Alumno {
+public class Alumno implements BaseEntity<Long> {
 	@Id
-	@SequenceGenerator(name = "Alumno_ID_GENERATOR", sequenceName = "Alumno_ID_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Alumno_ID_GENERATOR")
-	public Integer id_alumno;
-	public String nombres;
-	public String apellidoPaterno;
-	public String apellidoMaterno;
-	public Integer DNI;
-	public Integer promedio;
+	@SequenceGenerator(name = "alumno_id_generator", sequenceName = "alumno_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "alumno_id_generator")
+	private Long id;
+	@Column(length=50)
+	private String nombres;
+	@Column(length=50)
+	private String apellidoPaterno;
+	@Column(length=50)
+	private String apellidoMaterno;
+	@OneToMany(mappedBy ="alumno")
+	private Collection<Matricula> matriculas;
 
-
-	
-	public Alumno() {
+	@Override
+	public Long getId() {
+		return id;
 	}
 
-	public Alumno(String nombres, String apellidoPaterno, Integer promedio) {
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
 		this.nombres = nombres;
-		this.apellidoPaterno = apellidoPaterno;
-		this.promedio = promedio;
 	}
-	
-	
-	
+
+	public String getApellidoPaterno() {
+		return apellidoPaterno;
+	}
+
+	public void setApellidoPaterno(String apellidoPaterno) {
+		this.apellidoPaterno = apellidoPaterno;
+	}
+
+	public String getApellidoMaterno() {
+		return apellidoMaterno;
+	}
+
+	public void setApellidoMaterno(String apellidoMaterno) {
+		this.apellidoMaterno = apellidoMaterno;
+	}
+
 }

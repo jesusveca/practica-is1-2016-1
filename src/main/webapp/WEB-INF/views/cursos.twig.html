@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Cursos</title>
+</head>
+<body>
+	<table class=>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Codigo</th>
+				<th>Creditos</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+	{%for curso in cursos %}
+			<tr>
+				<td>{{ curso.id }}</td>
+				<td>{{ curso.nombre }}</td>
+				<td>{{ curso.codigo }}</td>
+				<td>{{ curso.creditos }}</td>
+				</tr>
+	{% endfor %}
+        </tbody>
+      </table>
+      <br />
+</body>
+</html>
